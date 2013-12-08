@@ -5,18 +5,18 @@ require "paper_ticket/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "paper_ticket"
+  s.name        = "paper-ticket"
   s.version     = PaperTicket::VERSION
   s.authors     = ["Christopher Curtis"]
   s.email       = ["ccurtisj@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of PaperTicket."
-  s.description = "TODO: Description of PaperTicket."
+  s.homepage    = "http://github.com/ccurtisj/paper-ticket"
+  s.summary     = "Rails engine for managing sweet raffles."
+  s.description = "Backed by Mongoid."
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.0.2"
 
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency "slim-rails"
 end
