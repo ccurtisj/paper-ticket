@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    paper-ticket (0.0.1)
+    paper_ticket (0.0.1)
       formtastic
       formtastic-bootstrap
       mongoid (~> 4.0.0alpha1)
@@ -128,6 +128,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  paper-ticket!
+  paper_ticket!
   rspec
   slim-rails
