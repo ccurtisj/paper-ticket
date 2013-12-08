@@ -19,6 +19,9 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.0.2"
   s.add_dependency "formtastic"
   s.add_dependency "formtastic-bootstrap"
+  s.add_dependency "mongoid"
+  s.add_dependency "sass"
+  s.add_dependency "slim"
 
   s.add_development_dependency "slim-rails"
 end
