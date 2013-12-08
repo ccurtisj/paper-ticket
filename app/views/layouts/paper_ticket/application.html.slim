@@ -1,0 +1,14 @@
+doctype
+html
+  head
+    title PaperTicket
+    = stylesheet_link_tag    "paper_ticket/application", media: "all"
+    = javascript_include_tag "paper_ticket/application"
+    = csrf_meta_tags
+
+  body
+	  
+    - flash.each do |name, msg|
+      = content_tag :div, msg, :class => "flash_#{name}"
+    
+    = yield

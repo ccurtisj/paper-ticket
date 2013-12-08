@@ -4,12 +4,24 @@ module PaperTicket
     # include Mongoid::Token
 
     field :token
+    field :name
+    field :email
 
-    belongs_to :raffle
+    belongs_to :raffle, class_name: 'PaperTicket::Raffle'
 
     validates_uniqueness_of :token
+    validates_presence_of :name, :email, :raffle_id
 
     before_create :set_token
+
+    def claimed?
+      self.email.present?
+    end
+
+    def claim!(opts)
+      self.update(email: opts[:email], name: opts[:name])
+    end
+
 
     private
 

@@ -30,7 +30,10 @@ h2 Tickets
 - else
   ul
     - @raffle.tickets.each do |ticket|
-      li= ticket.token
+      li
+        = ticket.token
+        - if ticket.claimed?
+          | - #{ticket.name} (#{ticket.email})
 
 
 

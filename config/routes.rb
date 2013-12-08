@@ -1,6 +1,15 @@
 PaperTicket::Engine.routes.draw do
 
-	resources :raffles, only: [:show]
+	resources :raffles, only: [:show] do
+		resources :tickets do
+			collection do
+				post :register
+			end
+			member do
+				get :registered
+			end
+	  end
+	end
 
 	namespace :admin do
 	  resources :raffles do

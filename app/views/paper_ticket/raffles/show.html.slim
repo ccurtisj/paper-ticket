@@ -2,3 +2,15 @@ h1= @raffle.title
 
 p
 	= @raffle.description
+
+h2 Claim your ticket
+
+= semantic_form_for @ticket, url: register_raffle_tickets_path(@raffle), method: 'post' do |f|
+
+	= hidden_field_tag :raffle_id, @raffle.id.to_s
+
+	= f.input :token
+	= f.input :name
+	= f.input :email
+
+	= f.submit 'Register'

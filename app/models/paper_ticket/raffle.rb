@@ -14,7 +14,7 @@ module PaperTicket
 
     def generate_tickets!(num=1)
     	num.times.each do
-	    	self.tickets.create!
+	    	self.tickets.build.save!(validate: false)
 	    end
     end
   end
