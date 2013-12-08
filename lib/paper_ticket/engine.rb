@@ -1,3 +1,5 @@
+require 'formtastic'
+require 'formtastic-bootstrap'
 require 'slim'
 
 module PaperTicket

@@ -1,0 +1,14 @@
+= semantic_form_for [:admin, @raffle] do |f|
+  - if @raffle.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@raffle.errors.count, "error")} prohibited this raffle from being saved:"
+      ul
+        - @raffle.errors.full_messages.each do |message|
+          li = message
+
+  = f.input :title
+  = f.input :description
+  = f.input :starts_at, as: 'string', input_html: {type: 'date'}
+  = f.input :ends_at, as: 'string', input_html: {type: 'date'}
+  
+  = f.submit 'Save'

@@ -1,0 +1,25 @@
+h1 Listing raffles fool
+
+table
+  tr
+    th Title
+    th Description
+    th Starts at
+    th Ends at
+    th
+    th
+    th
+
+  - @raffles.each do |raffle|
+    tr
+      td = raffle.title
+      td = raffle.description
+      td = raffle.starts_at
+      td = raffle.ends_at
+      td = link_to 'Show', [:admin, raffle]
+      td = link_to 'Edit', edit_admin_raffle_path(raffle)
+      td = link_to 'Destroy', [:admin, raffle], data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Raffle', new_admin_raffle_path

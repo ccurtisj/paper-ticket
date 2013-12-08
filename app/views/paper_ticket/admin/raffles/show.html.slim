@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @raffle.title
+p
+  strong Description:
+  = @raffle.description
+p
+  strong Starts at:
+  = @raffle.starts_at
+p
+  strong Ends at:
+  = @raffle.ends_at
+
+= link_to 'Edit', edit_admin_raffle_path(@raffle)
+'|
+= link_to 'Back', admin_raffles_path

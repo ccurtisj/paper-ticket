@@ -1,3 +1,5 @@
 PaperTicket::Engine.routes.draw do
-  resources :raffles
+	namespace :admin do
+	  resources :raffles
+	end
 end
