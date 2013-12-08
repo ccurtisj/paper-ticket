@@ -8,5 +8,14 @@ module PaperTicket
     field :ends_at, 			type: DateTime
 
     validates_presence_of :title
+
+    has_many :tickets, class_name: 'PaperTicket::Ticket'
+
+
+    def generate_tickets!(num=1)
+    	num.times.each do
+	    	self.tickets.create!
+	    end
+    end
   end
 end

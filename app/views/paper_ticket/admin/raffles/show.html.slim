@@ -17,6 +17,23 @@ p
   strong Ends at:
   = @raffle.ends_at
 
+h2 Generate 
+
+= form_tag generate_tickets_admin_raffle_path(@raffle) do
+  = text_field_tag :num_tickets
+  = submit_tag
+
+h2 Tickets
+
+- if @raffle.tickets.blank?
+  p No Tickets.
+- else
+  ul
+    - @raffle.tickets.each do |ticket|
+      li= ticket.token
+
+
+
 = link_to 'Edit', edit_admin_raffle_path(@raffle)
 '|
 = link_to 'Back', admin_raffles_path

@@ -3,7 +3,7 @@ require_dependency "paper_ticket/application_controller"
 module PaperTicket
   module Admin
     class RafflesController < ApplicationController
-      before_action :set_raffle, only: [:show, :edit, :update, :destroy]
+      before_action :set_raffle, only: [:show, :edit, :update, :destroy, :generate_tickets]
 
       # GET /raffles
       def index
@@ -41,6 +41,13 @@ module PaperTicket
         else
           render action: 'edit'
         end
+      end
+
+      def generate_tickets
+        @raffle.generate_tickets!(params[:num_tickets].to_i)
+
+        # put flash message
+        redirect_to admin_raffle_path(@raffle)
       end
 
       # DELETE /raffles/1
