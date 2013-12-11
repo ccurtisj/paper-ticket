@@ -1,6 +1,7 @@
 require 'formtastic'
 require 'formtastic-bootstrap'
 require 'slim'
+require 'wicked_pdf'
 
 module PaperTicket
   class Engine < ::Rails::Engine

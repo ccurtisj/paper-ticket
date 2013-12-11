@@ -23,9 +23,11 @@ Gem::Specification.new do |s|
 
   # Wait until mongoid 4 is out of beta
   # s.add_dependency "mongoid_token", '~> 2.0.0'
-  
+
   s.add_dependency "sass-rails"
   s.add_dependency "slim"
+  s.add_dependency "wicked_pdf"
+  s.add_dependency "wkhtmltopdf-binary"
 
   s.add_development_dependency "slim-rails"
 

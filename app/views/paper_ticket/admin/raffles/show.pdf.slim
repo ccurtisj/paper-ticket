@@ -1,0 +1,22 @@
+html
+  head
+  body
+    sass:
+      body
+        margin: 0
+        padding: 0
+      table
+        width: 8.5in
+      td
+        height: 200px
+        text-align: center
+        background: blue
+
+
+    = wicked_pdf_image_tag 'paper_ticket/pdf-background.jpg'
+    .overlay style= 'position:absolute;top:0;left:0;bottom:0;right:0;'
+      table
+        - @raffle.tickets.in_groups(2) do |tickets|
+          tr
+            td= tickets[0].token
+            td= tickets[1].token

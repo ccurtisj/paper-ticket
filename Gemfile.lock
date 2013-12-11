@@ -8,6 +8,8 @@ PATH
       rails (~> 4.0.2)
       sass-rails
       slim
+      wicked_pdf
+      wkhtmltopdf-binary
 
 GEM
   remote: https://rubygems.org/
@@ -123,6 +125,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
+    wicked_pdf (0.9.8)
+      rails
+    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby

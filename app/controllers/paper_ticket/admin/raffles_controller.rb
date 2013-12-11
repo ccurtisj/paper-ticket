@@ -3,6 +3,7 @@ require_dependency "paper_ticket/application_controller"
 module PaperTicket
   module Admin
     class RafflesController < ApplicationController
+
       before_action :set_raffle, only: [:show, :edit, :update, :destroy, :generate_tickets]
 
       # GET /raffles
@@ -12,6 +13,21 @@ module PaperTicket
 
       # GET /raffles/1
       def show
+        respond_to do |format|
+          format.html
+          format.pdf do
+            render pdf: 'file',
+              show_as_html: (params[:debug] == 'true'),
+              no_background: false,
+              page_size: 'Letter',
+              :margin => {
+                :top                => 0,                     # default 10 (mm)
+                :bottom             => 0,
+                :left               => 0,
+                :right              => 0
+              }
+          end
+        end
       end
 
       # GET /raffles/new
