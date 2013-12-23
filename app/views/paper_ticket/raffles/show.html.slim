@@ -5,12 +5,14 @@ p
 
 h2 Claim your ticket
 
-= semantic_form_for @ticket, url: register_raffle_tickets_path(@raffle), method: 'post' do |f|
+= semantic_form_for([@raffle, @ticket]) do |f|
 
-	= hidden_field_tag :raffle_id, @raffle.id.to_s
+  = hidden_field_tag :raffle_id, @raffle.id.to_s
 
-	= f.input :token
-	= f.input :name
-	= f.input :email
+  = f.semantic_errors
 
-	= f.submit 'Register'
+  = f.input :token
+  = f.input :name
+  = f.input :email
+
+  = f.submit 'Register for raffle'

@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:date_input] = '%Y-%m-%d'

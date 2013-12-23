@@ -4,7 +4,7 @@ module PaperTicket
   module Admin
     class RafflesController < ApplicationController
 
-      before_action :set_raffle, only: [:show, :edit, :update, :destroy, :generate_tickets]
+      before_action :set_raffle, only: [:show, :edit, :update, :destroy, :generate_tickets, :draw_winner]
 
       # GET /raffles
       def index
@@ -16,6 +16,10 @@ module PaperTicket
         respond_to do |format|
           format.html
           format.pdf do
+
+            @tickets = @raffle.tickets.unclaimed.unprinted
+            # @tickets.update_all(printed: true)
+
             render pdf: 'file',
               show_as_html: (params[:debug] == 'true'),
               no_background: false,
@@ -44,7 +48,7 @@ module PaperTicket
         @raffle = Raffle.new(raffle_params)
 
         if @raffle.save
-          redirect_to @raffle, notice: 'Raffle was successfully created.'
+          redirect_to [:admin, @raffle], notice: 'Raffle was successfully created.'
         else
           render action: 'new'
         end
@@ -53,7 +57,7 @@ module PaperTicket
       # PATCH/PUT /raffles/1
       def update
         if @raffle.update(raffle_params)
-          redirect_to @raffle, notice: 'Raffle was successfully updated.'
+          redirect_to [:admin, @raffle], notice: 'Raffle was successfully updated.'
         else
           render action: 'edit'
         end
@@ -61,15 +65,19 @@ module PaperTicket
 
       def generate_tickets
         @raffle.generate_tickets!(params[:num_tickets].to_i)
-
-        # put flash message
         redirect_to admin_raffle_path(@raffle)
+      end
+
+      def draw_winner
+        winner = @raffle.draw_winner!
+        flash = winner ? "Winner is #{winner.name}" : "No winner found!"
+        redirect_to admin_raffle_path(@raffle, winner_id: winner.id, notice: flash)
       end
 
       # DELETE /raffles/1
       def destroy
         @raffle.destroy
-        redirect_to raffles_url, notice: 'Raffle was successfully destroyed.'
+        redirect_to admin_raffles_url, notice: 'Raffle was successfully destroyed.'
       end
 
       private

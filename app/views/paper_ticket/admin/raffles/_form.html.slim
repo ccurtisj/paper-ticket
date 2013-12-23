@@ -7,8 +7,8 @@
           li = message
 
   = f.input :title
-  = f.input :description
-  = f.input :starts_at, as: 'string', input_html: {type: 'date'}
-  = f.input :ends_at, as: 'string', input_html: {type: 'date'}
-  
+  = f.input :description, as: 'text'
+  = f.input :starts_at, as: 'string', input_html: {type: 'date', value: date_input_value(@raffle.starts_at)}
+  = f.input :ends_at, as: 'string', input_html: {type: 'date', value: date_input_value(@raffle.ends_at)}
+
   = f.submit 'Save'

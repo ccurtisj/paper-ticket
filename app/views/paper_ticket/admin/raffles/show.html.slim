@@ -1,12 +1,20 @@
+css:
+  th, td{
+    padding: 5px 10px;
+  }
+  th{
+    background: #333;
+    color: white;}
+  td{
+    background: #EFEFEF;}
+
 p#notice = notice
+
+h1 = @raffle.title
 
 p
 	strong id:
 	= link_to @raffle.id, @raffle
-
-p
-  strong Title:
-  = @raffle.title
 p
   strong Description:
   = @raffle.description
@@ -17,25 +25,57 @@ p
   strong Ends at:
   = @raffle.ends_at
 
-h2 Generate 
+h2 Generate
 
 = form_tag generate_tickets_admin_raffle_path(@raffle) do
-  = text_field_tag :num_tickets
-  = submit_tag
+  = text_field_tag :num_tickets, nil, placeholder: 'Number of tickets'
+  = submit_tag 'Generate Tickets'
 
-h2 Tickets
+h2 All Tickets
 
 - if @raffle.tickets.blank?
   p No Tickets.
 - else
-  ul
+  table
+    thead
+      th Token
+      th Printed?
+      th Claimed By
+      th Claimed at
+      th Ticket Generated
     - @raffle.tickets.each do |ticket|
+      tr
+        td= ticket.token
+        td= ticket.printed?
+        td= ticket.claimed? ? "#{ticket.name} (#{ticket.email})" : '-'
+        td= ticket.claimed_at.try(:to_formatted_s, :short)
+        td= ticket.created_at.try(:to_formatted_s, :short)
+
+h2 Tickets Available for Drawing
+
+- if @raffle.tickets_ready_for_draw.blank?
+  p No Available Tickets
+- else
+  ul
+    - @raffle.tickets_ready_for_draw.each do |ticket|
       li
-        = ticket.token
+        => ticket.token
+        | - #{ticket.name} (#{ticket.email})
+
+h2 Winners
+
+- if @raffle.tickets.winners.blank?
+  p No Winners Yet.
+- else
+  ul
+    - @raffle.tickets.winners.each do |ticket|
+      li
+        => ticket.token
         - if ticket.claimed?
           | - #{ticket.name} (#{ticket.email})
 
-
+= form_tag draw_winner_admin_raffle_path(@raffle) do
+  = submit_tag 'Draw Winner'
 
 = link_to 'Edit', edit_admin_raffle_path(@raffle)
 '|

@@ -6,17 +6,17 @@ html
         margin: 0
         padding: 0
       table
-        width: 8.5in
+        width: 100%
       td
         height: 200px
         text-align: center
-        background: blue
+        background: rgba(0,0,255,0.5)
 
 
-    = wicked_pdf_image_tag 'paper_ticket/pdf-background.jpg'
-    .overlay style= 'position:absolute;top:0;left:0;bottom:0;right:0;'
+    = wicked_pdf_image_tag 'paper_ticket/pdf-background.jpg', style: 'width:100%;'
+    .overlay style= 'position:absolute;top:30px;left:0;bottom:0;right:0;'
       table
-        - @raffle.tickets.in_groups(2) do |tickets|
+        - @tickets.to_a.each_slice(2) do |tickets|
           tr
-            td= tickets[0].token
-            td= tickets[1].token
+            td= tickets[0].try(:token)
+            td= tickets[1].try(:token)
