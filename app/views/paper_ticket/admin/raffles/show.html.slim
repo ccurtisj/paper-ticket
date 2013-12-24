@@ -39,17 +39,26 @@ h2 All Tickets
   table
     thead
       th Token
-      th Printed?
-      th Claimed By
-      th Claimed at
       th Ticket Generated
-    - @raffle.tickets.each do |ticket|
+      th Printed?
+      th Sent
+      th Claimed By
+      th Claimed At
+    - @raffle.tickets.in_admin_order.each do |ticket|
       tr
         td= ticket.token
+        td= ticket.created_at.try(:to_formatted_s, :short)
         td= ticket.printed?
+        td
+          - if ticket.sent_at?
+            = ticket.sent_at.to_formatted_s(:short)
+          - elsif ticket.claimed?
+            | -
+          - else
+            = form_for [:sent, :admin, ticket] do |f|
+              = f.submit 'Sent'
         td= ticket.claimed? ? "#{ticket.name} (#{ticket.email})" : '-'
         td= ticket.claimed_at.try(:to_formatted_s, :short)
-        td= ticket.created_at.try(:to_formatted_s, :short)
 
 h2 Tickets Available for Drawing
 

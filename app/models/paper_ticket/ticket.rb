@@ -10,7 +10,8 @@ module PaperTicket
     field :winner,      type: Mongoid::Boolean, default: false
     field :printed,     type: Mongoid::Boolean, default: false
     field :claimed_at,  type: DateTime
-    field :won_at,       type: DateTime
+    field :won_at,      type: DateTime
+    field :sent_at,     type: DateTime
 
     belongs_to :raffle, class_name: 'PaperTicket::Raffle'
 
@@ -24,6 +25,7 @@ module PaperTicket
     scope :printed, where(printed: true)
     scope :unclaimed, where(email: nil)
     scope :unprinted, where(printed: false)
+    scope :in_admin_order, order_by("claimed_at DESC, sent_at DESC, printed DESC, created_at ASC")
 
     def claimed?
       self.email.present?

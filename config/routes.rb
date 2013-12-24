@@ -11,5 +11,10 @@ PaperTicket::Engine.routes.draw do
 	  		post :draw_winner
 	  	end
 	  end
+	  resources :tickets do
+	  	member do
+	  		patch :sent
+	  	end
+	  end
 	end
 end
