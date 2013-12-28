@@ -16,9 +16,8 @@ module PaperTicket
         respond_to do |format|
           format.html
           format.pdf do
-
-            @tickets = @raffle.tickets.unclaimed.unprinted
-            # @tickets.update_all(printed: true)
+            @tickets = @raffle.tickets.available_to_print.limit(10)
+            Ticket.in(id: @tickets.collect(&:id)).update_all(printed: true)
 
             render pdf: 'file',
               show_as_html: (params[:debug] == 'true'),

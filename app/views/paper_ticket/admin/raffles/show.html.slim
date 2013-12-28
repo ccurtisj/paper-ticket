@@ -48,7 +48,7 @@ h2 All Tickets
       tr
         td= ticket.token
         td= ticket.created_at.try(:to_formatted_s, :short)
-        td= ticket.printed?
+        td= ticket.printed? ? 'X' : 'O'
         td
           - if ticket.sent_at?
             = ticket.sent_at.to_formatted_s(:short)

@@ -26,6 +26,7 @@ module PaperTicket
     scope :unclaimed, where(email: nil)
     scope :unprinted, where(printed: false)
     scope :in_admin_order, order_by("claimed_at DESC, sent_at DESC, printed DESC, created_at ASC")
+    scope :available_to_print, where(printed: false, sent_at: nil, email: nil)
 
     def claimed?
       self.email.present?
