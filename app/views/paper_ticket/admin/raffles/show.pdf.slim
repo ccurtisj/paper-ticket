@@ -5,18 +5,30 @@ html
       body
         margin: 0
         padding: 0
+        width: 8.5in
+        height: 11in
+        position: relative
       table
-        width: 100%
+        width: 685px
+        margin: 30px 0 0 65px
       td
-        height: 200px
-        text-align: center
-        background: rgba(0,0,255,0.5)
+        height: 190px
+        // background: rgba(0,0,255,0.5)
+      .token
+        margin-left: 28px
+        font-size: 30px
+        font-family: Courier
+        margin-top: 48px
 
-
-    = wicked_pdf_image_tag 'paper_ticket/pdf-background.jpg', style: 'width:100%;'
-    .overlay style= 'position:absolute;top:30px;left:0;bottom:0;right:0;'
+    - if params[:debug] == "true"
+      = image_tag 'paper_ticket/pdf-background.jpg', style: 'width:100%;'
+    - else
+      = wicked_pdf_image_tag 'paper_ticket/pdf-background.jpg', style: 'width:100%;'
+    .overlay style= 'position:absolute;top:0px;left:0;bottom:0;right:0;'
       table
         - @tickets.to_a.each_slice(2) do |tickets|
           tr
-            td= tickets[0].try(:token)
-            td= tickets[1].try(:token)
+            td
+              .token= tickets[0].try(:token)
+            td
+              .token= tickets[1].try(:token)
