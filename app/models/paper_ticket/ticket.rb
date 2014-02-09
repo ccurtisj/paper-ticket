@@ -20,13 +20,13 @@ module PaperTicket
 
     before_create :set_token
 
-    scope :winners, where(winner: true)
+    scope :winners, -> {where(winner: true)}
     scope :ready_for_draw, ->(raffle) { ne(email: nil, winner: true).lt(claimed_at: raffle.ends_at) }
-    scope :printed, where(printed: true)
-    scope :unclaimed, where(email: nil)
-    scope :unprinted, where(printed: false)
-    scope :in_admin_order, order_by("claimed_at DESC, sent_at DESC, printed DESC, created_at ASC")
-    scope :available_to_print, where(printed: false, sent_at: nil, email: nil)
+    scope :printed, -> {where(printed: true)}
+    scope :unclaimed, -> {where(email: nil)}
+    scope :unprinted, -> {where(printed: false)}
+    scope :in_admin_order, -> {order_by("claimed_at DESC, sent_at DESC, printed DESC, created_at ASC")}
+    scope :available_to_print, -> {where(printed: false, sent_at: nil, email: nil)}
 
     def claimed?
       self.email.present?
