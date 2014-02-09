@@ -19,7 +19,8 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.0.2"
   s.add_dependency "formtastic"
   s.add_dependency "formtastic-bootstrap"
-  s.add_dependency "mongoid", "~> 4.0.0alpha1"
+  # s.add_dependency "mongoid", "~> 4.0.0alpha1"
+  s.add_dependency "mongoid"
 
   # Wait until mongoid 4 is out of beta
   # s.add_dependency "mongoid_token", '~> 2.0.0'
